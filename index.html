@@ -2,419 +2,1208 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#070a12">
-<meta name="description" content="Maintenance website kelas">
-<title>Maintenance • Kelas Kita</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070d">
+<title>CLASS // MAINTENANCE</title>
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
-:root{--bg:#070a12;--card:rgba(14,18,30,.72);--line:rgba(255,255,255,.09);--text:#f4f7ff;--muted:#8c96aa;--a:#7c5cff;--g:#25d6b1}
-*{box-sizing:border-box;margin:0;padding:0}body{min-height:100vh;background:var(--bg);color:var(--text);font-family:Inter,sans-serif;overflow-x:hidden}
-.grid{position:fixed;inset:0;opacity:.16;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:55px 55px;mask-image:linear-gradient(#000,transparent 90%);pointer-events:none}
-.orb{position:fixed;width:380px;height:380px;border-radius:50%;filter:blur(90px);opacity:.15;pointer-events:none}.o1{background:var(--a);left:-180px;top:10%}.o2{background:var(--g);right:-180px;bottom:5%}
-.top{width:min(1180px,92%);margin:auto;padding:26px 0;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2}
-.brand{color:#fff;text-decoration:none;font-weight:800;letter-spacing:.12em;font-size:14px}.brand b{color:var(--a)}.status{font:600 10px 'JetBrains Mono';color:#8d98aa;display:flex;gap:8px;align-items:center}.status i{width:7px;height:7px;border-radius:50%;background:var(--g);box-shadow:0 0 12px var(--g);animation:pulse 1.5s infinite}
-main{width:min(1180px,92%);margin:auto;display:grid;grid-template-columns:1.45fr .75fr;gap:24px;align-items:center;position:relative;z-index:1}.card,.terminal{border:1px solid var(--line);background:var(--card);backdrop-filter:blur(18px);border-radius:26px;box-shadow:0 30px 80px #0005}.card{text-align:center;padding:50px}
-.icon{width:86px;height:86px;margin:0 auto 23px;border:1px solid #7c5cff35;border-radius:24px;display:grid;place-items:center;background:#7c5cff0d;box-shadow:0 0 50px #7c5cff18;animation:float 3s ease-in-out infinite}.icon svg{width:48px}
-.eyebrow{font:600 10px 'JetBrains Mono';letter-spacing:.24em;color:var(--g);margin-bottom:13px}h1{font-size:clamp(38px,6vw,68px);line-height:1;letter-spacing:-.055em;margin-bottom:18px}h1 span{background:linear-gradient(100deg,#9a83ff,var(--g));-webkit-background-clip:text;color:transparent}.sub{max-width:610px;margin:auto;color:var(--muted);font-size:14px;line-height:1.8}
-.progressbox{margin:30px auto 23px;max-width:600px;text-align:left;padding:17px;border:1px solid var(--line);border-radius:15px;background:#ffffff03}.ph,.pf{display:flex;justify-content:space-between;font:600 9px 'JetBrains Mono';color:#7f899c}.ph strong{color:#fff;font-size:11px}.bar{height:7px;background:#ffffff08;border-radius:20px;overflow:hidden;margin:12px 0}.bar i{display:block;width:78%;height:100%;background:linear-gradient(90deg,var(--a),var(--g));border-radius:20px;box-shadow:0 0 18px #7c5cff66}
-.count{display:flex;justify-content:center;align-items:center;gap:13px;margin:23px 0}.time{min-width:65px}.time strong{display:block;font:700 25px 'JetBrains Mono'}.time small{font:600 8px 'JetBrains Mono';color:#697386}.count>b{color:#444d60}
-.actions{display:flex;justify-content:center;gap:10px}.btn{border:0;border-radius:12px;padding:12px 18px;color:#fff;font:600 11px Inter;cursor:pointer;transition:.25s}.btn:hover{transform:translateY(-2px)}.primary{background:linear-gradient(100deg,#7658ed,#8b70ff);box-shadow:0 8px 25px #7c5cff22}.secondary{background:#ffffff08;border:1px solid var(--line)}
-.socials{display:flex;justify-content:center;gap:10px;margin-top:28px}.social{width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;background:#ffffff04;transition:.25s}.social:hover{transform:translateY(-4px);background:#ffffff0b}.social svg{width:18px;height:18px}
-.terminal{font:11px 'JetBrains Mono';overflow:hidden}.tt{height:43px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:0 15px;color:#657084;font-size:9px}.dots{display:flex;gap:5px}.dots i{width:7px;height:7px;border-radius:50%;background:#343b4b}.tb{padding:23px 20px;min-height:300px;line-height:2;color:#798499}.tb em{color:#4f596b;font-style:normal}.tb b{color:var(--g)}.cursor{color:var(--g);animation:blink .8s infinite}
-footer{width:min(1180px,92%);margin:26px auto 20px;display:flex;justify-content:space-between;color:#4e5768;font:9px 'JetBrains Mono'}
-.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);background:#151b29;border:1px solid var(--line);padding:12px 18px;border-radius:12px;color:#cbd2df;font-size:11px;opacity:0;transition:.3s;z-index:10}.toast.show{opacity:1;transform:translate(-50%,0)}
-.modal{position:fixed;inset:0;background:#0009;backdrop-filter:blur(8px);display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:.25s;z-index:9}.modal.open{opacity:1;pointer-events:auto}.modalcard{width:min(460px,100%);padding:30px;border:1px solid var(--line);border-radius:22px;background:#0e1320}.close{float:right;border:0;background:#ffffff08;color:#9ca6b8;border-radius:9px;width:32px;height:32px;font-size:20px}.label{font:600 9px 'JetBrains Mono';color:var(--g);letter-spacing:.16em}.modalcard h2{font-size:25px;margin:15px 0 10px}.modalcard p{font-size:13px;line-height:1.8;color:var(--muted)}@keyframes float{50%{transform:translateY(-7px)}}@keyframes pulse{50%{opacity:.35;transform:scale(.75)}}@keyframes blink{50%{opacity:0}}
-@media(max-width:850px){main{grid-template-columns:1fr}.terminal{display:none}.card{padding:42px 20px}}@media(max-width:480px){.status{display:none}.count{gap:5px}.time{min-width:55px}.time strong{font-size:21px}footer{font-size:8px}}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root{
+    --bg:#05070d;
+    --panel:rgba(10,14,24,.72);
+    --border:rgba(255,255,255,.08);
+    --text:#f4f7ff;
+    --muted:#707b90;
+    --purple:#8066ff;
+    --cyan:#00e5ff;
+    --green:#20e0a0;
+    --red:#ff5577;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:Inter,sans-serif;
+    overflow-x:hidden;
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+#particles{
+    position:fixed;
+    inset:0;
+    z-index:0;
+}
+
+.grid{
+    position:fixed;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+
+    background-size:50px 50px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black 0%,
+            rgba(0,0,0,.7) 55%,
+            transparent 100%
+        );
+}
+
+.scanline{
+    position:fixed;
+    left:0;
+    width:100%;
+    height:2px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(0,229,255,.35),
+        transparent
+    );
+    box-shadow:0 0 20px rgba(0,229,255,.25);
+    animation:scan 7s linear infinite;
+    z-index:2;
+    pointer-events:none;
+}
+
+.glow{
+    position:fixed;
+    width:450px;
+    height:450px;
+    border-radius:50%;
+    filter:blur(130px);
+    opacity:.12;
+    pointer-events:none;
+    z-index:0;
+}
+
+.glow.one{
+    background:var(--purple);
+    left:-220px;
+    top:-150px;
+}
+
+.glow.two{
+    background:var(--cyan);
+    right:-220px;
+    bottom:-150px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    width:min(1200px,92%);
+    margin:auto;
+    padding:28px 0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:relative;
+    z-index:5;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-family:"JetBrains Mono",monospace;
+    font-weight:700;
+    letter-spacing:.12em;
+}
+
+.logo-box{
+    width:36px;
+    height:36px;
+    display:grid;
+    place-items:center;
+    border:1px solid rgba(128,102,255,.45);
+    border-radius:10px;
+    background:rgba(128,102,255,.08);
+    color:var(--purple);
+    box-shadow:
+        0 0 25px rgba(128,102,255,.15),
+        inset 0 0 20px rgba(128,102,255,.05);
+}
+
+.logo span{
+    color:var(--cyan);
+}
+
+.system{
+    display:flex;
+    align-items:center;
+    gap:9px;
+
+    font-family:"JetBrains Mono",monospace;
+    font-size:9px;
+    letter-spacing:.12em;
+    color:#758096;
+}
+
+.system-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 15px var(--green);
+    animation:pulse 1.5s infinite;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+main{
+    width:min(1200px,92%);
+    min-height:calc(100vh - 150px);
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:1.35fr .75fr;
+    align-items:center;
+    gap:22px;
+
+    position:relative;
+    z-index:4;
+}
+
+/* =========================
+   MAIN CARD
+========================= */
+
+.card{
+    position:relative;
+    overflow:hidden;
+
+    padding:55px;
+
+    border:1px solid var(--border);
+    border-radius:28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.015)
+        );
+
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+
+    box-shadow:
+        0 35px 100px rgba(0,0,0,.45),
+        inset 0 1px rgba(255,255,255,.04);
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent 20%,
+            rgba(128,102,255,.07),
+            transparent 60%
+        );
+
+    pointer-events:none;
+}
+
+.corner{
+    position:absolute;
+    width:25px;
+    height:25px;
+    border-color:rgba(0,229,255,.45);
+}
+
+.corner.tl{
+    top:18px;
+    left:18px;
+    border-top:1px solid;
+    border-left:1px solid;
+}
+
+.corner.br{
+    bottom:18px;
+    right:18px;
+    border-bottom:1px solid;
+    border-right:1px solid;
+}
+
+/* =========================
+   ICON
+========================= */
+
+.maintenance-icon{
+    width:90px;
+    height:90px;
+    margin:0 auto 25px;
+
+    display:grid;
+    place-items:center;
+
+    border:1px solid rgba(128,102,255,.3);
+    border-radius:25px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(128,102,255,.15),
+            transparent 70%
+        );
+
+    box-shadow:
+        0 0 45px rgba(128,102,255,.13),
+        inset 0 0 30px rgba(128,102,255,.04);
+
+    animation:float 3s ease-in-out infinite;
+}
+
+.maintenance-icon svg{
+    width:50px;
+    height:50px;
+}
+
+/* =========================
+   TEXT
+========================= */
+
+.tag{
+    text-align:center;
+
+    font-family:"JetBrains Mono",monospace;
+    font-size:10px;
+    letter-spacing:.25em;
+
+    color:var(--cyan);
+
+    margin-bottom:14px;
+}
+
+h1{
+    text-align:center;
+
+    font-size:clamp(40px,6vw,72px);
+    line-height:.98;
+
+    letter-spacing:-.065em;
+
+    margin-bottom:20px;
+}
+
+h1 .gradient{
+    background:
+        linear-gradient(
+            100deg,
+            #a18cff,
+            var(--purple),
+            var(--cyan)
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.description{
+    max-width:620px;
+    margin:auto;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:14px;
+    line-height:1.8;
+}
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress-container{
+    margin:32px auto 25px;
+    max-width:620px;
+
+    padding:17px;
+
+    border:1px solid var(--border);
+    border-radius:15px;
+
+    background:rgba(255,255,255,.018);
+}
+
+.progress-header,
+.progress-footer{
+    display:flex;
+    justify-content:space-between;
+
+    font-family:"JetBrains Mono",monospace;
+    font-size:9px;
+    color:#687389;
+}
+
+.progress-header strong{
+    color:#fff;
+}
+
+.progress-track{
+    height:7px;
+    margin:12px 0;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.055);
+
+    overflow:hidden;
+}
+
+.progress-bar{
+    width:82%;
+    height:100%;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--purple),
+            var(--cyan)
+        );
+
+    box-shadow:
+        0 0 20px rgba(0,229,255,.3);
+
+    position:relative;
+}
+
+.progress-bar::after{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.5),
+            transparent
+        );
+
+    animation:shine 2s infinite;
+}
+
+/* =========================
+   COUNTDOWN
+========================= */
+
+.countdown{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:13px;
+
+    margin:26px 0;
+}
+
+.unit{
+    min-width:68px;
+    text-align:center;
+}
+
+.unit strong{
+    display:block;
+
+    font-family:"JetBrains Mono",monospace;
+    font-size:27px;
+}
+
+.unit small{
+    display:block;
+
+    margin-top:3px;
+
+    font-family:"JetBrains Mono",monospace;
+    font-size:8px;
+
+    color:#626d82;
+    letter-spacing:.12em;
+}
+
+.separator{
+    color:#394155;
+    font-family:"JetBrains Mono",monospace;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.actions{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+}
+
+button{
+    border:0;
+    cursor:pointer;
+
+    padding:13px 19px;
+
+    border-radius:12px;
+
+    color:white;
+
+    font-family:Inter,sans-serif;
+    font-size:11px;
+    font-weight:600;
+
+    transition:.25s;
+}
+
+button:hover{
+    transform:translateY(-3px);
+}
+
+.primary{
+    background:
+        linear-gradient(
+            100deg,
+            #7056e8,
+            #917aff
+        );
+
+    box-shadow:
+        0 10px 30px rgba(128,102,255,.2);
+}
+
+.secondary{
+    background:rgba(255,255,255,.045);
+    border:1px solid var(--border);
+}
+
+/* =========================
+   SOCIAL
+========================= */
+
+.socials{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+
+    margin-top:29px;
+}
+
+.social{
+    width:40px;
+    height:40px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:12px;
+
+    border:1px solid var(--border);
+
+    background:rgba(255,255,255,.025);
+
+    transition:.25s;
+}
+
+.social:hover{
+    transform:translateY(-5px) scale(1.04);
+
+    background:rgba(255,255,255,.07);
+
+    border-color:rgba(255,255,255,.18);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.2);
+}
+
+.social svg{
+    width:18px;
+    height:18px;
+}
+
+/* =========================
+   TERMINAL
+========================= */
+
+.terminal{
+    overflow:hidden;
+
+    border:1px solid var(--border);
+    border-radius:22px;
+
+    background:rgba(7,10,17,.78);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.45);
+
+    backdrop-filter:blur(18px);
+
+    font-family:"JetBrains Mono",monospace;
+}
+
+.terminal-head{
+    height:45px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 16px;
+
+    border-bottom:1px solid var(--border);
+
+    color:#667187;
+    font-size:9px;
+}
+
+.terminal-dots{
+    display:flex;
+    gap:5px;
+}
+
+.terminal-dots i{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#303748;
+}
+
+.terminal-body{
+    padding:22px;
+
+    min-height:330px;
+
+    color:#68758b;
+
+    font-size:10px;
+    line-height:2.15;
+}
+
+.terminal-body em{
+    color:#3e485b;
+    font-style:normal;
+}
+
+.ok{
+    color:var(--green);
+}
+
+.live{
+    color:var(--cyan);
+}
+
+.cursor{
+    color:var(--cyan);
+    animation:blink .8s infinite;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    width:min(1200px,92%);
+    margin:0 auto 22px;
+
+    display:flex;
+    justify-content:space-between;
+
+    color:#465065;
+
+    font-family:"JetBrains Mono",monospace;
+    font-size:8px;
+
+    position:relative;
+    z-index:4;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+
+    display:grid;
+    place-items:center;
+
+    padding:20px;
+
+    background:rgba(0,0,0,.75);
+
+    backdrop-filter:blur(10px);
+
+    opacity:0;
+    pointer-events:none;
+
+    transition:.25s;
+
+    z-index:20;
+}
+
+.modal.active{
+    opacity:1;
+    pointer-events:auto;
+}
+
+.modal-box{
+    width:min(460px,100%);
+
+    padding:32px;
+
+    border:1px solid var(--border);
+    border-radius:22px;
+
+    background:#0b0f19;
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.7);
+}
+
+.close{
+    float:right;
+
+    width:32px;
+    height:32px;
+
+    padding:0;
+
+    background:rgba(255,255,255,.05);
+
+    font-size:20px;
+}
+
+.modal-label{
+    font-family:"JetBrains Mono",monospace;
+    font-size:9px;
+    color:var(--cyan);
+    letter-spacing:.16em;
+}
+
+.modal-box h2{
+    margin:15px 0 10px;
+    font-size:25px;
+}
+
+.modal-box p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.8;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:25px;
+
+    transform:translate(-50%,25px);
+
+    padding:12px 18px;
+
+    border:1px solid var(--border);
+    border-radius:12px;
+
+    background:#121824;
+
+    color:#cbd2df;
+
+    font-size:11px;
+
+    opacity:0;
+    pointer-events:none;
+
+    transition:.3s;
+
+    z-index:30;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes pulse{
+    50%{
+        opacity:.35;
+        transform:scale(.7);
+    }
+}
+
+@keyframes float{
+    50%{
+        transform:translateY(-8px);
+    }
+}
+
+@keyframes shine{
+    from{transform:translateX(-100%)}
+    to{transform:translateX(100%)}
+}
+
+@keyframes blink{
+    50%{opacity:0}
+}
+
+@keyframes scan{
+    0%{top:-5%}
+    100%{top:105%}
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+    main{
+        grid-template-columns:1fr;
+    }
+
+    .terminal{
+        display:none;
+    }
+
+    .card{
+        padding:45px 22px;
+    }
+}
+
+@media(max-width:520px){
+
+    header{
+        padding:20px 0;
+    }
+
+    .system{
+        display:none;
+    }
+
+    h1{
+        font-size:42px;
+    }
+
+    .description{
+        font-size:13px;
+    }
+
+    .countdown{
+        gap:5px;
+    }
+
+    .unit{
+        min-width:55px;
+    }
+
+    .unit strong{
+        font-size:21px;
+    }
+
+    .actions button{
+        padding:11px 14px;
+    }
+
+    footer{
+        gap:15px;
+        font-size:7px;
+    }
+}
 </style>
 </head>
+
 <body>
-<div class="grid"></div><div class="orb o1"></div><div class="orb o2"></div>
 
-<header class="top">
-<a class="brand" href="#">KELAS<b>.</b>WEB</a>
-<div class="status"><i></i>SYSTEM MAINTENANCE</div>
-</header>
-
-<main>
-<section class="card">
-<div class="icon">
-<svg viewBox="0 0 64 64" fill="none"><path d="M39 13a15 15 0 0 0-6 22L18 50a5 5 0 0 0 7 7l15-15a15 15 0 0 0 9-25l-10 10-7-7 7-7Z" stroke="#9a83ff" stroke-width="4" stroke-linejoin="round"/><path d="m44 20 5-5" stroke="#25d6b1" stroke-width="4" stroke-linecap="round"/></svg>
-</div>
-<p class="eyebrow">KELAS DIGITAL • 2026</p>
-<h1>Sedang <span>Maintenance</span></h1>
-<p class="sub">Website kelas sedang kami upgrade agar tampil lebih cepat, aman, dan nyaman. Tenang, data dan informasi kelas tetap aman.</p>
-
-<div class="progressbox">
-<div class="ph"><span>PROGRESS UPDATE</span><strong id="pv">78%</strong></div>
-<div class="bar"><i id="pb"></i></div>
-<div class="pf"><span>Optimizing system...</span><span id="live">RUNNING</span></div>
-</div>
-
-<div class="count">
-<div class="time"><strong id="d">00</strong><small>HARI</small></div><b>:</b>
-<div class="time"><strong id="h">00</strong><small>JAM</small></div><b>:</b>
-<div class="time"><strong id="m">00</strong><small>MENIT</small></div><b>:</b>
-<div class="time"><strong id="s">00</strong><small>DETIK</small></div>
-</div>
-
-<div class="actions">
-<button class="btn primary" id="notify">🔔 Ingatkan Saya</button>
-<button class="btn secondary" id="info">⌁ Detail</button>
-</div>
-
-<div class="socials">
-<a class="social" href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="#d6dbea" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.7" r="1" fill="#d6dbea" stroke="none"/></svg></a>
-<a class="social" href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="#d6dbea"><path d="M15.5 3c.4 2.2 1.7 3.6 3.9 3.8v3.2c-1.4.1-2.7-.3-3.9-1v6.1c0 4-2.7 6.4-6.2 6.4-3 0-5.3-2.2-5.3-5 0-3.1 2.5-5.2 6.2-5.2.4 0 .8 0 1.2.1v3.2c-.4-.1-.8-.2-1.2-.2-1.4 0-2.5.8-2.5 2 0 1.1.9 1.9 2 1.9 1.4 0 2.2-.9 2.2-2.6V3h3.6Z"/></svg></a>
-<a class="social" href="#" aria-label="Spotify"><svg viewBox="0 0 24 24" fill="#25d6b1"><circle cx="12" cy="12" r="10"/><path d="M7 9.2c3.3-1 7.5-.7 10 .7M7.8 12.4c2.8-.7 6-.4 8.5.7M8.7 15.3c2.1-.5 4.5-.3 6.5.5" fill="none" stroke="#071018" stroke-width="1.5" stroke-linecap="round"/></svg></a>
-</div>
-</section>
-
-<aside class="terminal">
-<div class="tt"><span class="dots"><i></i><i></i><i></i></span><span>class@server:~</span><span id="clock">00:00:00</span></div>
-<div class="tb">
-<p><em>[06:00:01]</em> Initializing maintenance mode...</p>
-<p><em>[06:00:02]</em> Checking class database... <b>OK</b></p>
-<p><em>[06:00:03]</em> Updating frontend modules... <b>78%</b></p>
-<p><em>[06:00:04]</em> Optimizing assets... <b>RUNNING</b></p>
-<p><em>[06:00:05]</em> Security check... <b>OK</b></p>
-<p>&gt; <span id="typing"></span><span class="cursor">█</span></p>
-</div>
-</aside>
-</main>
-
-<footer><span>© 2026 Kelas Kita</span><span>HTML5 • CSS3 • JavaScript</span></footer>
-<div class="toast" id="toast"></div>
-<div class="modal" id="modal"><div class="modalcard"><button class="close" id="close">×</button><span class="label">MAINTENANCE INFO</span><h2>Website sedang diperbarui.</h2><p>Kami sedang melakukan pembaruan tampilan, optimasi performa, dan pengecekan sistem. Silakan kembali setelah countdown selesai.</p></div></div>
-
-<script>
-const end=Date.now()+3*86400000;let progress=78;
-function countdown(){let x=Math.max(0,end-Date.now());d.textContent=String(Math.floor(x/86400000)).padStart(2,"0");h.textContent=String(Math.floor(x/3600000)%24).padStart(2,"0");m.textContent=String(Math.floor(x/60000)%60).padStart(2,"0");s.textContent=String(Math.floor(x/1000)%60).padStart(2,"0")}setInterval(countdown,1000);countdown();
-function clock(){clockEl.textContent=new Date().toLocaleTimeString("id-ID",{hour12:false})}const clockEl=document.getElementById("clock");setInterval(clock,1000);clock();
-setInterval(()=>{if(progress<99){progress+=Math.random()>.7?1:0;pv.textContent=progress+"%";pb.style.width=progress+"%"}},5000);
-const msgs=["deploy --class-site --optimize","scanning modules...","checking responsive layout...","syncing class information...","almost there..."];let mi=0,ci=0;
-function type(){typing.textContent=msgs[mi].slice(0,ci++);if(ci<=msgs[mi].length)setTimeout(type,55);else setTimeout(()=>{ci=0;mi=(mi+1)%msgs.length;type()},1800)}type();
-function sound(){try{let c=new(window.AudioContext||window.webkitAudioContext),o=c.createOscillator(),g=c.createGain();o.frequency.value=520;g.gain.setValueAtTime(.035,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.08);o.connect(g).connect(c.destination);o.start();o.stop(c.currentTime+.08)}catch(e){}}
-function toast(t){const x=document.getElementById("toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),2500)}
-document.querySelectorAll("button,.social").forEach(x=>x.onclick=sound);
-document.getElementById("notify").onclick=()=>{if("Notification"in window&&Notification.permission==="default")Notification.requestPermission().then(p=>toast(p==="granted"?"Notifikasi aktif.":"Notifikasi belum diizinkan."));else toast("Notifikasi sudah diproses.")};
-const modal=document.getElementById("modal");document.getElementById("info").onclick=()=>modal.classList.add("open");document.getElementById("close").onclick=()=>modal.classList.remove("open");modal.onclick=e=>{if(e.target===modal)modal.classList.remove("open")};document.onkeydown=e=>{if(e.key==="Escape")modal.classList.remove("open")};
-</script>
-</body>
-</html>
-<div class="count">
-<div class="time"><strong id="d">00</strong><small>HARI</small></div><b>:</b>
-<div class="time"><strong id="h">00</strong><small>JAM</small></div><b>:</b>
-<div class="time"><strong id="m">00</strong><small>MENIT</small></div><b>:</b>
-<div class="time"><strong id="s">00</strong><small>DETIK</small></div>
-</div>
-
-<div class="actions">
-<button class="btn primary" id="notify">🔔 Ingatkan Saya</button>
-<button class="btn secondary" id="info">⌁ Detail</button>
-</div>
-
-<div class="socials">
-<a class="social" href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="#d6dbea" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.7" r="1" fill="#d6dbea" stroke="none"/></svg></a>
-<a class="social" href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="#d6dbea"><path d="M15.5 3c.4 2.2 1.7 3.6 3.9 3.8v3.2c-1.4.1-2.7-.3-3.9-1v6.1c0 4-2.7 6.4-6.2 6.4-3 0-5.3-2.2-5.3-5 0-3.1 2.5-5.2 6.2-5.2.4 0 .8 0 1.2.1v3.2c-.4-.1-.8-.2-1.2-.2-1.4 0-2.5.8-2.5 2 0 1.1.9 1.9 2 1.9 1.4 0 2.2-.9 2.2-2.6V3h3.6Z"/></svg></a>
-<a class="social" href="#" aria-label="Spotify"><svg viewBox="0 0 24 24" fill="#25d6b1"><circle cx="12" cy="12" r="10"/><path d="M7 9.2c3.3-1 7.5-.7 10 .7M7.8 12.4c2.8-.7 6-.4 8.5.7M8.7 15.3c2.1-.5 4.5-.3 6.5.5" fill="none" stroke="#071018" stroke-width="1.5" stroke-linecap="round"/></svg></a>
-</div>
-</section>
-
-<aside class="terminal">
-<div class="tt"><span class="dots"><i></i><i></i><i></i></span><span>class@server:~</span><span id="clock">00:00:00</span></div>
-<div class="tb">
-<p><em>[06:00:01]</em> Initializing maintenance mode...</p>
-<p><em>[06:00:02]</em> Checking class database... <b>OK</b></p>
-<p><em>[06:00:03]</em> Updating frontend modules... <b>78%</b></p>
-<p><em>[06:00:04]</em> Optimizing assets... <b>RUNNING</b></p>
-<p><em>[06:00:05]</em> Security check... <b>OK</b></p>
-<p>&gt; <span id="typing"></span><span class="cursor">█</span></p>
-</div>
-</aside>
-</main>
-
-<footer><span>© 2026 Kelas Kita</span><span>HTML5 • CSS3 • JavaScript</span></footer>
-<div class="toast" id="toast"></div>
-<div class="modal" id="modal"><div class="modalcard"><button class="close" id="close">×</button><span class="label">MAINTENANCE INFO</span><h2>Website sedang diperbarui.</h2><p>Kami sedang melakukan pembaruan tampilan, optimasi performa, dan pengecekan sistem. Silakan kembali setelah countdown selesai.</p></div></div>
-
-<script>
-const end=Date.now()+3*86400000;let progress=78;
-function countdown(){let x=Math.max(0,end-Date.now());d.textContent=String(Math.floor(x/86400000)).padStart(2,"0");h.textContent=String(Math.floor(x/3600000)%24).padStart(2,"0");m.textContent=String(Math.floor(x/60000)%60).padStart(2,"0");s.textContent=String(Math.floor(x/1000)%60).padStart(2,"0")}setInterval(countdown,1000);countdown();
-function clock(){clockEl.textContent=new Date().toLocaleTimeString("id-ID",{hour12:false})}const clockEl=document.getElementById("clock");setInterval(clock,1000);clock();
-setInterval(()=>{if(progress<99){progress+=Math.random()>.7?1:0;pv.textContent=progress+"%";pb.style.width=progress+"%"}},5000);
-const msgs=["deploy --class-site --optimize","scanning modules...","checking responsive layout...","syncing class information...","almost there..."];let mi=0,ci=0;
-function type(){typing.textContent=msgs[mi].slice(0,ci++);if(ci<=msgs[mi].length)setTimeout(type,55);else setTimeout(()=>{ci=0;mi=(mi+1)%msgs.length;type()},1800)}type();
-function sound(){try{let c=new(window.AudioContext||window.webkitAudioContext),o=c.createOscillator(),g=c.createGain();o.frequency.value=520;g.gain.setValueAtTime(.035,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.08);o.connect(g).connect(c.destination);o.start();o.stop(c.currentTime+.08)}catch(e){}}
-function toast(t){const x=document.getElementById("toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),2500)}
-document.querySelectorAll("button,.social").forEach(x=>x.onclick=sound);
-document.getElementById("notify").onclick=()=>{if("Notification"in window&&Notification.permission==="default")Notification.requestPermission().then(p=>toast(p==="granted"?"Notifikasi aktif.":"Notifikasi belum diizinkan."));else toast("Notifikasi sudah diproses.")};
-const modal=document.getElementById("modal");document.getElementById("info").onclick=()=>modal.classList.add("open");document.getElementById("close").onclick=()=>modal.classList.remove("open");modal.onclick=e=>{if(e.target===modal)modal.classList.remove("open")};document.onkeydown=e=>{if(e.key==="Escape")modal.classList.remove("open")};
-</script>
-</body>
-                                                                                                                                                                                                                                                                                                                     </html>.section{padding:35px 0}
-.title{display:flex;justify-content:space-between;align-items:end;margin-bottom:15px}
-.title h2{font-size:23px}.title span{color:var(--muted);font:10px monospace}
-.structure{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.role small{color:var(--muted);font-size:10px;text-transform:uppercase}.role b{display:block;color:var(--g);margin-top:7px}
-table{width:100%;border-collapse:collapse}
-th,td{text-align:left;padding:13px 9px;border-bottom:1px solid var(--line);vertical-align:top}
-th{color:var(--g);font-size:11px}td{color:#b9c7c0;font-size:12px;line-height:1.8}td:first-child{color:#fff;font-weight:800;width:90px}
-.piket{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.day b{color:var(--g)}.day span{display:block;color:#55665e;margin-top:7px;font-size:12px}
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.video{background:var(--panel);border:1px solid var(--line);border-radius:13px;overflow:hidden;transition:.3s}
-.video:hover{transform:translateY(-4px);border-color:#43ff9155}
-.video video{width:100%;display:block;aspect-ratio:16/9;background:#050708}.video div{padding:10px;color:var(--muted);font:10px monospace}
-.socials{display:flex;gap:10px}
-.social{display:flex;align-items:center;gap:14px;min-height:76px}
-.social-icon{width:43px;height:43px;flex:0 0 43px;display:grid;place-items:center;border-radius:12px}
-.social-icon svg{width:25px;height:25px}
-.ig-icon{color:#fff;background:linear-gradient(135deg,#833ab4,#fd1d1d 55%,#fcb045);box-shadow:0 0 20px #fd1d1d2b}
-.tt-icon{color:#fff;background:#050505;border:1px solid #283039;box-shadow:4px 0 0 #25f4ee,-4px 0 0 #fe2c55}
-.sp-icon{color:#1ed760;background:#07130b;border:1px solid #1ed76055;box-shadow:0 0 20px #1ed76022}
-.social-ig:hover{border-color:#c1358455}
-.social-tt:hover{border-color:#25f4ee66}
-.social-sp:hover{border-color:#1ed76077}
-
-.social{flex:1;text-decoration:none;color:white;position:relative;overflow:hidden}
-.social strong{color:var(--g);font-size:13px}.social small{display:block;color:var(--muted);margin-top:5px}
-.social.spotify strong{color:#1ed760}
-footer{text-align:center;color:#4f6058;padding:35px;font:10px monospace}
-.reveal{opacity:0;transform:translateY(22px) scale(.985);transition:.7s cubic-bezier(.2,.8,.2,1)}
-.reveal.show{opacity:1;transform:none}
-.ripple{position:fixed;width:12px;height:12px;border:1px solid var(--g);border-radius:50%;pointer-events:none;z-index:999;animation:ripple .55s ease-out forwards}
-@keyframes ripple{to{width:90px;height:90px;opacity:0;transform:translate(-39px,-39px)}}
-@media(max-width:800px){.grid,.structure,.gallery{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.wrap{width:calc(100% - 20px)}.grid,.structure,.piket,.gallery{grid-template-columns:1fr}.socials{flex-direction:column}.brand h1{font-size:21px}.logo{width:58px;height:58px}}
-</style>
-</head>
-<body>
 <canvas id="particles"></canvas>
-<div class="wrap">
+
+<div class="grid"></div>
+<div class="scanline"></div>
+
+<div class="glow one"></div>
+<div class="glow two"></div>
+
 <header>
-<div class="brand"><img src="logo.jpg" class="logo" alt="Logo Kelas"><div><h1>CLASS QUESTERS TKJ A 👑⚡</h1><p>Kelass Nakall Tapii Banyakk Akall🔥🔥</p></div></div>
-<nav>
-<a href="#beranda">Beranda</a><a href="#struktur">Struktur</a><a href="#mapel">Mapel</a><a href="#piket">Piket</a><a href="#gallery">Gallery</a>
-</nav>
-</header>
 
-<main id="beranda">
-<section class="hero reveal"><div class="eyebrow">CLASS QUESTERS / TKJ A</div><h2>Welcome to <span>Our Class.</span></h2><p>Tempat kumpul, informasi, jadwal, kegiatan, dan momen-momen kelas XI TKJ A.</p></section>
-<div class="grid reveal">
-<div class="card"><h3>📊 CLASS DASHBOARD</h3><div class="stats">
-<div class="stat"><span class="label">JUMLAH MURID</span><b>27</b><span class="label">Siswa/i</span></div>
-<div class="stat"><span class="label">JURUSAN</span><b>TKJ</b><span class="label">Teknik Komputer dan Jaringan</span></div>
-</div></div>
-<div class="card"><h3>⚡ CLASS STATUS</h3><p style="color:var(--muted);line-height:1.8;font-size:13px">Satu kelas, satu cerita. Tetap kompak, tetap nakal, tapi jangan lupa akal. 🔥</p></div>
-</div>
-</main>
+    <div class="logo">
+        <div class="logo-box">K</div>
+        CLASS<span>//</span>WEB
+    </div>
 
-<section class="section reveal" id="struktur"><div class="title"><h2>👑 Struktur Kelas</h2><span>CLASS ORGANIZATION</span></div><div class="structure" id="structure"></div></section>
+    <div class="system">
+        <div class="system-dot"></div>
+        SYSTEM MAINTENANCE
+    </div>
 
-<section class="section reveal" id="mapel"><div class="title"><h2>📚 Mata Pelajaran</h2><span>WEEKLY SCHEDULE</span></div><div class="card"><table>
-<tr><th>HARI</th><th>MATA PELAJARAN</th></tr>
-<tr><td>Senin</td><td>Administrasi Infrastruktur Jaringan (AIJ)<br>Matematika<br>Teknologi Layanan Jaringan (TLJ)</td></tr>
-<tr><td>Selasa</td><td>Teknologi Jaringan Berbasis Luas (TJBL)<br>Pendidikan Pancasila<br>Bahasa Inggris<br>Projek Kreatif dan Kewirausahaan (PKK)</td></tr>
-<tr><td>Rabu</td><td>Administrasi Sistem Jaringan (ASJ)<br>Administrasi Infrastruktur Jaringan (AIJ)</td></tr>
-<tr><td>Kamis</td><td>Bahasa Inggris<br>Sejarah<br>Administrasi Sistem Jaringan (ASJ)<br>Teknologi Jaringan Berbasis Luas (TJBL)</td></tr>
-<tr><td>Jum'at</td><td>Pendidikan Jasmani Olahraga &amp; Kesehatan (PJOK)</td></tr>
-<tr><td>Sabtu</td><td>Teknologi Layanan Jaringan (TLJ)<br>Pendidikan Agama Islam dan Budi Pekerti (PAIBP)<br>Bahasa Indonesia</td></tr>
-</table></div></section>
-
-<section class="section reveal" id="piket"><div class="title"><h2>🧹 Jadwal Piket</h2><span>TO BE UPDATED</span></div><div class="piket" id="piketList"></div></section>
-
-<section class="section reveal" id="gallery"><div class="title"><h2>🎬 Gallery</h2><span>14 VIDEOS</span></div><div class="gallery" id="galleryGrid"></div></section>
-
-<section class="section reveal"><div class="title"><h2>🔗 Social</h2><span>FOLLOW THE CLASS</span></div><div class="socials">
-<a class="social social-ig" href="https://instagram.com/class_tekajee_aaahay" target="_blank" rel="noopener">
-  <div class="social-icon ig-icon">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.7" r="1.2" fill="currentColor"/></svg>
-  </div>
-  <div><strong>Instagram</strong><small>@class_tekajee_aaahay</small></div>
-</a>
-<a class="social social-tt" href="https://tiktok.com/@classquesterstkja" target="_blank" rel="noopener">
-  <div class="social-icon tt-icon">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4c.5 2.3 1.8 3.7 4 4.1v3.1c-1.5-.1-2.8-.5-4-1.3v5.7a5.5 5.5 0 1 1-5.5-5.5c.4 0 .8 0 1.2.1v3.2a2.6 2.6 0 1 0 1.4 2.2V4h2.9z" fill="currentColor"/></svg>
-  </div>
-  <div><strong>TikTok</strong><small>@classquesterstkja</small></div>
-</a>
-<a class="social social-sp" id="spotifyLink" href="#" target="_blank" rel="noopener">
-  <div class="social-icon sp-icon">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="currentColor"/><path d="M7.3 9.2c3.3-1 6.7-.8 9.4.6M7.8 12c2.8-.7 5.7-.5 8 .6M8.4 14.6c2.1-.5 4.3-.3 6 .4" fill="none" stroke="#07110b" stroke-width="1.4" stroke-linecap="round"/></svg>
-  </div>
-  <div><strong>Spotify</strong><small>Playlist Kelas — TKJ A</small></div>
-</a>
-</div></section>
-
-<footer>CLASS QUESTERS TKJ A 👑⚡ — Kelass Nakall Tapii Banyakk Akall🔥🔥</footer>
-</div>
-
-<script>
-/* ===== DATA YANG GAMPANG DIEDIT ===== */
-const strukturKelas={"Ketua":"Kenzy","Wakil Ketua":"Devi","Bendahara":"Abdan","Wakil Bendahara":"Salsa","Sekretaris":"Aini","Wakil Sekretaris":"mboh iki sopo","Keamanan":"rareti","Kebersihan":"rareti","Keagamaan":"Deas"};
-const piket={"Senin":"Aldo,Raffa","Selasa":"Hamim,Enggar","Rabu":"Abdan","Kamis":"Priya,Haqky","Jum'at":"Roziq,Riki","Sabtu":"Deas,Farkhan"};
-const spotifyPlaylist="https://open.spotify.com/playlist/2N7og4P8mytq61T8tdyWJH?si=ZY4jCSyDRAy-qqe-YthMvg&utm_source=copy-link&pi=w_SNODd0RVa7f";
-
-/* Render struktur */
-Object.entries(strukturKelas).forEach(([r,n])=>{
- structure.innerHTML+=`<div class="role"><small>${r}</small><b>${n||"Belum diisi"}</b></div>`;
-});
-Object.entries(piket).forEach(([d,n])=>{
- piketList.innerHTML+=`<div class="day"><b>${d}</b><span>${n||"Belum diisi"}</span></div>`;
-});
-
-/* Render 14 video */
-for(let i=1;i<=14;i++){
- galleryGrid.innerHTML+=`<div class="video"><video src="video-${i}.mp4" controls preload="metadata"></video><div>VIDEO-${i}</div></div>`;
-}
-if(spotifyPlaylist!=="https://open.spotify.com/playlist/2N7og4P8mytq61T8tdyWJH?si=ZY4jCSyDRAy-qqe-YthMvg&utm_source=copy-link&pi=w_SNODd0RVa7f") spotifyLink.href=spotifyPlaylist;
-
-/* Scroll reveal */
-const ob=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add("show")),{threshold:.1});
-document.querySelectorAll(".reveal").forEach(e=>ob.observe(e));
-
-/* Particle system */
-const canvas=document.getElementById("particles"),ctx=canvas.getContext("2d");
-let particles=[];
-function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
-addEventListener("resize",resize);resize();
-for(let i=0;i<55;i++) particles.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.8+.4,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25});
-function draw(){
- ctx.clearRect(0,0,canvas.width,canvas.height);
- particles.forEach(p=>{
-  p.x+=p.vx;p.y+=p.vy;
-  if(p.x<0)p.x=innerWidth;if(p.x>innerWidth)p.x=0;
-  if(p.y<0)p.y=innerHeight;if(p.y>innerHeight)p.y=0;
-  ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle="#43ff9170";ctx.fill();
- });
- requestAnimationFrame(draw);
-}
-draw();
-
-/* Click sound: Web Audio API, no extra sound file needed */
-let audioCtx;
-function clickSound(){
- audioCtx ||= new (window.AudioContext||window.webkitAudioContext)();
- if(audioCtx.state==="suspended") audioCtx.resume();
- const o=audioCtx.createOscillator(),g=audioCtx.createGain();
- o.type="sine";o.frequency.setValueAtTime(680,audioCtx.currentTime);
- o.frequency.exponentialRampToValueAtTime(330,audioCtx.currentTime+.07);
- g.gain.setValueAtTime(.045,audioCtx.currentTime);
- g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+.08);
- o.connect(g);g.connect(audioCtx.des<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#070a12">
-<meta name="description" content="Maintenance website kelas">
-<title>Maintenance • Kelas Kita</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
-:root{--bg:#070a12;--card:rgba(14,18,30,.72);--line:rgba(255,255,255,.09);--text:#f4f7ff;--muted:#8c96aa;--a:#7c5cff;--g:#25d6b1}
-*{box-sizing:border-box;margin:0;padding:0}body{min-height:100vh;background:var(--bg);color:var(--text);font-family:Inter,sans-serif;overflow-x:hidden}
-.grid{position:fixed;inset:0;opacity:.16;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:55px 55px;mask-image:linear-gradient(#000,transparent 90%);pointer-events:none}
-.orb{position:fixed;width:380px;height:380px;border-radius:50%;filter:blur(90px);opacity:.15;pointer-events:none}.o1{background:var(--a);left:-180px;top:10%}.o2{background:var(--g);right:-180px;bottom:5%}
-.top{width:min(1180px,92%);margin:auto;padding:26px 0;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2}
-.brand{color:#fff;text-decoration:none;font-weight:800;letter-spacing:.12em;font-size:14px}.brand b{color:var(--a)}.status{font:600 10px 'JetBrains Mono';color:#8d98aa;display:flex;gap:8px;align-items:center}.status i{width:7px;height:7px;border-radius:50%;background:var(--g);box-shadow:0 0 12px var(--g);animation:pulse 1.5s infinite}
-main{width:min(1180px,92%);margin:auto;display:grid;grid-template-columns:1.45fr .75fr;gap:24px;align-items:center;position:relative;z-index:1}.card,.terminal{border:1px solid var(--line);background:var(--card);backdrop-filter:blur(18px);border-radius:26px;box-shadow:0 30px 80px #0005}.card{text-align:center;padding:50px}
-.icon{width:86px;height:86px;margin:0 auto 23px;border:1px solid #7c5cff35;border-radius:24px;display:grid;place-items:center;background:#7c5cff0d;box-shadow:0 0 50px #7c5cff18;animation:float 3s ease-in-out infinite}.icon svg{width:48px}
-.eyebrow{font:600 10px 'JetBrains Mono';letter-spacing:.24em;color:var(--g);margin-bottom:13px}h1{font-size:clamp(38px,6vw,68px);line-height:1;letter-spacing:-.055em;margin-bottom:18px}h1 span{background:linear-gradient(100deg,#9a83ff,var(--g));-webkit-background-clip:text;color:transparent}.sub{max-width:610px;margin:auto;color:var(--muted);font-size:14px;line-height:1.8}
-.progressbox{margin:30px auto 23px;max-width:600px;text-align:left;padding:17px;border:1px solid var(--line);border-radius:15px;background:#ffffff03}.ph,.pf{display:flex;justify-content:space-between;font:600 9px 'JetBrains Mono';color:#7f899c}.ph strong{color:#fff;font-size:11px}.bar{height:7px;background:#ffffff08;border-radius:20px;overflow:hidden;margin:12px 0}.bar i{display:block;width:78%;height:100%;background:linear-gradient(90deg,var(--a),var(--g));border-radius:20px;box-shadow:0 0 18px #7c5cff66}
-.count{display:flex;justify-content:center;align-items:center;gap:13px;margin:23px 0}.time{min-width:65px}.time strong{display:block;font:700 25px 'JetBrains Mono'}.time small{font:600 8px 'JetBrains Mono';color:#697386}.count>b{color:#444d60}
-.actions{display:flex;justify-content:center;gap:10px}.btn{border:0;border-radius:12px;padding:12px 18px;color:#fff;font:600 11px Inter;cursor:pointer;transition:.25s}.btn:hover{transform:translateY(-2px)}.primary{background:linear-gradient(100deg,#7658ed,#8b70ff);box-shadow:0 8px 25px #7c5cff22}.secondary{background:#ffffff08;border:1px solid var(--line)}
-.socials{display:flex;justify-content:center;gap:10px;margin-top:28px}.social{width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;background:#ffffff04;transition:.25s}.social:hover{transform:translateY(-4px);background:#ffffff0b}.social svg{width:18px;height:18px}
-.terminal{font:11px 'JetBrains Mono';overflow:hidden}.tt{height:43px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:0 15px;color:#657084;font-size:9px}.dots{display:flex;gap:5px}.dots i{width:7px;height:7px;border-radius:50%;background:#343b4b}.tb{padding:23px 20px;min-height:300px;line-height:2;color:#798499}.tb em{color:#4f596b;font-style:normal}.tb b{color:var(--g)}.cursor{color:var(--g);animation:blink .8s infinite}
-footer{width:min(1180px,92%);margin:26px auto 20px;display:flex;justify-content:space-between;color:#4e5768;font:9px 'JetBrains Mono'}
-.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);background:#151b29;border:1px solid var(--line);padding:12px 18px;border-radius:12px;color:#cbd2df;font-size:11px;opacity:0;transition:.3s;z-index:10}.toast.show{opacity:1;transform:translate(-50%,0)}
-.modal{position:fixed;inset:0;background:#0009;backdrop-filter:blur(8px);display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:.25s;z-index:9}.modal.open{opacity:1;pointer-events:auto}.modalcard{width:min(460px,100%);padding:30px;border:1px solid var(--line);border-radius:22px;background:#0e1320}.close{float:right;border:0;background:#ffffff08;color:#9ca6b8;border-radius:9px;width:32px;height:32px;font-size:20px}.label{font:600 9px 'JetBrains Mono';color:var(--g);letter-spacing:.16em}.modalcard h2{font-size:25px;margin:15px 0 10px}.modalcard p{font-size:13px;line-height:1.8;color:var(--muted)}@keyframes float{50%{transform:translateY(-7px)}}@keyframes pulse{50%{opacity:.35;transform:scale(.75)}}@keyframes blink{50%{opacity:0}}
-@media(max-width:850px){main{grid-template-columns:1fr}.terminal{display:none}.card{padding:42px 20px}}@media(max-width:480px){.status{display:none}.count{gap:5px}.time{min-width:55px}.time strong{font-size:21px}footer{font-size:8px}}
-</style>
-</head>
-<body>
-<div class="grid"></div><div class="orb o1"></div><div class="orb o2"></div>
-
-<header class="top">
-<a class="brand" href="#">KELAS<b>.</b>WEB</a>
-<div class="status"><i></i>SYSTEM MAINTENANCE</div>
 </header>
 
 <main>
+
 <section class="card">
-<div class="icon">
-<svg viewBox="0 0 64 64" fill="none"><path d="M39 13a15 15 0 0 0-6 22L18 50a5 5 0 0 0 7 7l15-15a15 15 0 0 0 9-25l-10 10-7-7 7-7Z" stroke="#9a83ff" stroke-width="4" stroke-linejoin="round"/><path d="m44 20 5-5" stroke="#25d6b1" stroke-width="4" stroke-linecap="round"/></svg>
-</div>
-<p class="eyebrow">KELAS DIGITAL • 2026</p>
-<h1>Sedang <span>Maintenance</span></h1>
-<p class="sub">Website kelas sedang kami upgrade agar tampil lebih cepat, aman, dan nyaman. Tenang, data dan informasi kelas tetap aman.</p>
 
-<div class="progressbox">
-<div class="ph"><span>PROGRESS UPDATE</span><strong id="pv">78%</strong></div>
-<div class="bar"><i id="pb"></i></div>
-<div class="pf"><span>Optimizing system...</span><span id="live">RUNNING</span></div>
-</div>
+    <div class="corner tl"></div>
+    <div class="corner br"></div>
 
-<div class="count">
-<div class="time"><strong id="d">00</strong><small>HARI</small></div><b>:</b>
-<div class="time"><strong id="h">00</strong><small>JAM</small></div><b>:</b>
-<div class="time"><strong id="m">00</strong><small>MENIT</small></div><b>:</b>
-<div class="time"><strong id="s">00</strong><small>DETIK</small></div>
-</div>
+    <div class="maintenance-icon">
 
-<div class="actions">
-<button class="btn primary" id="notify">🔔 Ingatkan Saya</button>
-<button class="btn secondary" id="info">⌁ Detail</button>
-</div>
+        <svg viewBox="0 0 64 64" fill="none">
 
-<div class="socials">
-<a class="social" href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="#d6dbea" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.7" r="1" fill="#d6dbea" stroke="none"/></svg></a>
-<a class="social" href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="#d6dbea"><path d="M15.5 3c.4 2.2 1.7 3.6 3.9 3.8v3.2c-1.4.1-2.7-.3-3.9-1v6.1c0 4-2.7 6.4-6.2 6.4-3 0-5.3-2.2-5.3-5 0-3.1 2.5-5.2 6.2-5.2.4 0 .8 0 1.2.1v3.2c-.4-.1-.8-.2-1.2-.2-1.4 0-2.5.8-2.5 2 0 1.1.9 1.9 2 1.9 1.4 0 2.2-.9 2.2-2.6V3h3.6Z"/></svg></a>
-<a class="social" href="#" aria-label="Spotify"><svg viewBox="0 0 24 24" fill="#25d6b1"><circle cx="12" cy="12" r="10"/><path d="M7 9.2c3.3-1 7.5-.7 10 .7M7.8 12.4c2.8-.7 6-.4 8.5.7M8.7 15.3c2.1-.5 4.5-.3 6.5.5" fill="none" stroke="#071018" stroke-width="1.5" stroke-linecap="round"/></svg></a>
-</div>
+            <path
+                d="M39 13a15 15 0 0 0-6 22L18 50a5 5 0 0 0 7 7l15-15a15 15 0 0 0 9-25l-10 10-7-7 7-7Z"
+                stroke="#9a83ff"
+                stroke-width="4"
+                stroke-linejoin="round"
+            />
+
+            <path
+                d="M44 20l5-5"
+                stroke="#00e5ff"
+                stroke-width="4"
+                stroke-linecap="round"
+            />
+
+        </svg>
+
+    </div>
+
+    <div class="tag">
+        CLASS DIGITAL SYSTEM • 2026
+    </div>
+
+    <h1>
+        Sedang
+        <span class="gradient">Maintenance</span>
+    </h1>
+
+    <p class="description">
+        Website kelas sedang melakukan upgrade sistem.
+        Kami sedang meningkatkan performa, tampilan,
+        keamanan, dan beberapa fitur baru.
+    </p>
+
+    <div class="progress-container">
+
+        <div class="progress-header">
+            <span>SYSTEM UPDATE</span>
+            <strong id="progressText">82%</strong>
+        </div>
+
+        <div class="progress-track">
+            <div
+                class="progress-bar"
+                id="progressBar">
+            </div>
+        </div>
+
+        <div class="progress-footer">
+            <span>OPTIMIZING...</span>
+            <span id="statusText">RUNNING</span>
+        </div>
+
+    </div>
+
+    <div class="countdown">
+
+        <div class="unit">
+            <strong id="days">00</strong>
+            <small>DAYS</small>
+        </div>
+
+        <div class="separator">:</div>
+
+        <div class="unit">
+            <strong id="hours">00</strong>
+            <small>HOURS</small>
+        </div>
+
+        <div class="separator">:</div>
+
+        <div class="unit">
+            <strong id="minutes">00</strong>
+            <small>MINUTES</small>
+        </div>
+
+        <div class="separator">:</div>
+
+        <div class="unit">
+            <strong id="seconds">00</strong>
+            <small>SECONDS</small>
+        </div>
+
+    </div>
+
+    <div class="actions">
+
+        <button
+            class="primary"
+            id="notifyBtn">
+            🔔 Ingatkan Saya
+        </button>
+
+        <button
+            class="secondary"
+            id="infoBtn">
+            ⌁ Detail
+        </button>
+
+    </div>
+
+    <div class="socials">
+
+        <!-- Instagram -->
+        <a class="social" href="#" aria-label="Instagram">
+
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#d9deeb"
+                stroke-width="1.8">
+
+                <rect
+                    x="3"
+                    y="3"
+                    width="18"
+                    height="18"
+                    rx="5"/>
+
+                <circle
+                    cx="12"
+                    cy="12"
+                    r="4"/>
+
+                <circle
+                    cx="17.4"
+                    cy="6.7"
+                    r="1"
+                    fill="#d9deeb"
+                    stroke="none"/>
+
+            </svg>
+
+        </a>
+
+        <!-- TikTok -->
+        <a class="social" href="#" aria-label="TikTok">
+
+            <svg
+                viewBox="0 0 24 24"
+                fill="#d9deeb">
+
+                <path d="
+                    M15.5 3
+                    c.4 2.2 1.7 3.6 3.9 3.8
+                    v3.2
+                    c-1.4.1-2.7-.3-3.9-1
+                    v6.1
+                    c0 4-2.7 6.4-6.2 6.4
+                    -3 0-5.3-2.2-5.3-5
+                    0-3.1 2.5-5.2 6.2-5.2
+                    .4 0 .8 0 1.2.1
+                    v3.2
+                    c-.4-.1-.8-.2-1.2-.2
+                    -1.4 0-2.5.8-2.5 2
+                    0 1.1.9 1.9 2 1.9
+                    1.4 0 2.2-.9 2.2-2.6
+                    V3h3.6Z"/>
+
+            </svg>
+
+        </a>
+
+        <!-- Spotify -->
+        <a class="social" href="#" aria-label="Spotify">
+
+            <svg
+                viewBox="0 0 24 24"
+                fill="#20e0a0">
+
+                <circle
+                    cx="12"
+                    cy="12"
+                    r="10"/>
+
+                <path
+                    d="M7 9.2c3.3-1 7.5-.7 10 .7
+                       M7.8 12.4c2.8-.7 6-.4 8.5.7
+                       M8.7 15.3c2.1-.5 4.5-.3 6.5.5"
+                    fill="none"
+                    stroke="#061017"
+                    stroke-width="1.5"
+                    stroke-linecap="round"/>
+
+            </svg>
+
+        </a>
+
+    </div>
+
 </section>
 
+
+<!-- TERMINAL -->
+
 <aside class="terminal">
-<div class="tt"><span class="dots"><i></i><i></i><i></i></span><span>class@server:~</span><span id="clock">00:00:00</span></div>
-<div class="tb">
-<p><em>[06:00:01]</em> Initializing maintenance mode...</p>
-<p><em>[06:00:02]</em> Checking class database... <b>OK</b></p>
-<p><em>[06:00:03]</em> Updating frontend modules... <b>78%</b></p>
-<p><em>[06:00:04]</em> Optimizing assets... <b>RUNNING</b></p>
-<p><em>[06:00:05]</em> Security check... <b>OK</b></p>
-<p>&gt; <span id="typing"></span><span class="cursor">█</span></p>
-</div>
+
+    <div class="terminal-head">
+
+        <div class="terminal-dots">
+            <i></i>
+            <i></i>
+            <i></i>
+        </div>
+
+        <span>class@server:~</span>
+
+        <span id="clock">
+            00:00:00
+        </span>
+
+    </div>
+
+    <div class="terminal-body">
+
+        <p>
+            <em>[SYSTEM]</em>
+            Initializing maintenance mode...
+        </p>
+
+        <p>
+            <em>[DATABASE]</em>
+            Checking class database...
+            <b class="ok">OK</b>
+        </p>
+
+        <p>
+            <em>[FRONTEND]</em>
+            Updating interface...
+            <b class="live">82%</b>
+        </p>
+
+        <p>
+            <em>[ASSETS]</em>
+            Optimizing assets...
+            <b class="live">RUNNING</b>
+        </p>
+
+        <p>
+            <em>[SECURITY]</em>
+            Security check...
+            <b class="ok">OK</b>
+        </p>
+
+        <p>
+            <em>[SERVER]</em>
+            Connection...
+            <b class="ok">STABLE</b>
+        </p>
+
+        <br>
+
+        <p>
+            &gt;
+            <span id="typing"></span>
+            <span class="cursor">█</span>
+        </p>
+
+    </div>
+
 </aside>
+
 </main>
 
-<footer><span>© 2026 Kelas Kita</span><span>HTML5 • CSS3 • JavaScript</span></footer>
+<footer>
+
+    <span>
+        © 2026 CLASS WEB
+    </span>
+
+    <span>
+        HTML5 • CSS3 • JAVASCRIPT
+    </span>
+
+</footer>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-box">
+
+        <button
+            class="close"
+            id="closeBtn">
+            ×
+        </button>
+
+        <div class="modal-label">
+            MAINTENANCE INFORMATION
+        </div>
+
+        <h2>
+            Website sedang diperbarui.
+        </h2>
+
+        <p>
+            Kami sedang melakukan optimasi sistem,
+            memperbaiki beberapa bagian website,
+            dan menyiapkan fitur baru untuk kelas.
+            Silakan kembali setelah maintenance selesai.
+        </p>
+
+    </div>
+
+</div>
+
+
 <div class="toast" id="toast"></div>
-<div class="modal" id="modal"><div class="modalcard"><button class="close" id="close">×</button><span class="label">MAINTENANCE INFO</span><h2>Website sedang diperbarui.</h2><p>Kami sedang melakukan pembaruan tampilan, optimasi performa, dan pengecekan sistem. Silakan kembali setelah countdown selesai.</p></div></div>
+
 
 <script>
-const end=Date.now()+3*86400000;let progress=78;
-function countdown(){let x=Math.max(0,end-Date.now());d.textContent=String(Math.floor(x/86400000)).padStart(2,"0");h.textContent=String(Math.floor(x/3600000)%24).padStart(2,"0");m.textContent=String(Math.floor(x/60000)%60).padStart(2,"0");s.textContent=String(Math.floor(x/1000)%60).padStart(2,"0")}setInterval(countdown,1000);countdown();
-function clock(){clockEl.textContent=new Date().toLocaleTimeString("id-ID",{hour12:false})}const clockEl=document.getElementById("clock");setInterval(clock,1000);clock();
-setInterval(()=>{if(progress<99){progress+=Math.random()>.7?1:0;pv.textContent=progress+"%";pb.style.width=progress+"%"}},5000);
-const msgs=["deploy --class-site --optimize","scanning modules...","checking responsive layout...","syncing class information...","almost there..."];let mi=0,ci=0;
-function type(){typing.textContent=msgs[mi].slice(0,ci++);if(ci<=msgs[mi].length)setTimeout(type,55);else setTimeout(()=>{ci=0;mi=(mi+1)%msgs.length;type()},1800)}type();
-function sound(){try{let c=new(window.AudioContext||window.webkitAudioContext),o=c.createOscillator(),g=c.createGain();o.frequency.value=520;g.gain.setValueAtTime(.035,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.08);o.connect(g).connect(c.destination);o.start();o.stop(c.currentTime+.08)}catch(e){}}
-function toast(t){const x=document.getElementById("toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),2500)}
-document.querySelectorAll("button,.social").forEach(x=>x.onclick=sound);
-document.getElementById("notify").onclick=()=>{if("Notification"in window&&Notification.permission==="default")Notification.requestPermission().then(p=>toast(p==="granted"?"Notifikasi aktif.":"Notifikasi belum diizinkan."));else toast("Notifikasi sudah diproses.")};
-const modal=document.getElementById("modal");document.getElementById("info").onclick=()=>modal.classList.add("open");document.getElementById("close").onclick=()=>modal.classList.remove("open");modal.onclick=e=>{if(e.target===modal)modal.classList.remove("open")};document.onkeydown=e=>{if(e.key==="Escape")modal.classList.remove("open")};
-</script>
-</body>
-</html>tination);o.start();o.stop(audioCtx.currentTime+.08);
-}
-document.addEventListener("click",e=>{
- if(e.target.closest("a,button,.card,.role,.day,.social,.video")){
-   clickSound();
-   const r=document.createElement("span");r.className="ripple";
-   r.style.left=e.clientX+"px";r.style.top=e.clientY+"px";document.body.appendChild(r);
-   setTimeout(()=>r.remove(),600);
- }
-});
-</script>
-</body>
-</html>
+
+/* =====================================
+   PARTICLE SYSTEM
+===================================== */
+
+const canvas =
+    document.getElementById("particles");
+
+const ctx =
