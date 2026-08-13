@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CLASS QUESTERS TKJ A 👑⚡</title>
-<meta name="description" content="Website resmi CLASS QUESTERS TKJ A — Kelass Nakall Tapii Banyakk Akall🔥🔥">
+<title>Social Media — CLASS QUESTERS TKJ A</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -43,28 +42,18 @@
   </div>
 </header>
 
-<section class="hero">
-  <canvas id="heroParticles"></canvas>
-  <div class="wrap hero-inner">
-    <div class="eyebrow">👋 SELAMAT DATANG</div>
-    <h2>CLASS QUESTERS<br><span class="grad">TKJ A 👑⚡</span></h2>
-    <p class="hero-bio" data-class-bio>Kelass Nakall Tapii Banyakk Akall🔥🔥</p>
-    <div class="hero-cta">
-      <a href="struktur.html" class="btn btn-primary magnetic ripple-btn" data-sound="click">Lihat Struktur →</a>
-      <a href="gallery.html" class="btn btn-outline magnetic ripple-btn" data-sound="click">Buka Gallery</a>
-    </div>
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">🔗 FOLLOW THE CLASS</div>
+    <h2>Social Media</h2>
+    <p>Follow &amp; dengerin playlist kelas kita.</p>
+  </div>
+</section>
 
-    <div class="stats-grid" id="homeClassInfo">
-      <div class="stat-card reveal">
-        <div class="stat-label">Jumlah Murid</div>
-        <div class="stat-num"><span data-count="27" data-total-students>0</span> Siswa/i</div>
-        <div class="stat-desc">Anggota aktif kelas</div>
-      </div>
-      <div class="stat-card reveal" style="animation-delay:.06s">
-        <div class="stat-label">Jurusan</div>
-        <div class="stat-num" data-major-short style="font-size:26px">TKJ</div>
-        <div class="stat-desc" data-major-long>Teknik Komputer dan Jaringan</div>
-      </div>
+<section>
+  <div class="wrap">
+    <div class="social-grid" id="socialGrid">
+      <!-- diisi otomatis dari /api/social -->
     </div>
   </div>
 </section>
@@ -103,19 +92,12 @@
 <script src="js/music.js"></script>
 <script src="js/app.js"></script>
 <script>
-  // stagger huruf judul loading screen
   (function(){
     const msg = "CLASS QUESTERS";
     const el = document.getElementById("loadTitle");
     if(!el) return;
     el.innerHTML = msg.split("").map((c,i)=>`<span style="animation-delay:${i*0.035}s">${c===" "?"&nbsp;":c}</span>`).join("");
   })();
-  document.addEventListener("DOMContentLoaded", ()=>{
-    const canvas = document.getElementById("heroParticles");
-    if(canvas && window.ClassParticles){
-      ClassParticles.createEngine(canvas, { density: 16000, maxParticles: 70, emberRatio: 0.14 });
-    }
-  });
 </script>
 </body>
 </html>
