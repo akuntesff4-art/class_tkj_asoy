@@ -24,6 +24,7 @@
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
+html,body{max-width:100%;overflow-x:hidden}
 body{
   font-family:var(--sans);color:var(--text);
   background:
@@ -35,7 +36,6 @@ body{
   opacity:0;transition:opacity .4s ease;
 }
 body.loaded{opacity:1}
-body.page-out{opacity:0;filter:blur(6px);transition:opacity .32s ease, filter .32s ease}
 
 body::after{
   content:"";position:fixed;inset:0;pointer-events:none;opacity:.07;z-index:0;
@@ -77,24 +77,38 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
   transition:opacity .7s ease, visibility .7s ease;overflow:hidden;
 }
-#loadingScreen.hide{opacity:0;visibility:hidden;pointer-events:none}
+#loadingScreen.hide{visibility:hidden;pointer-events:none}
 #loadParticles{position:absolute;inset:0;z-index:0}
-.load-emblem{
-  position:relative;z-index:1;width:84px;height:84px;border-radius:50%;
-  border:2px solid var(--g);display:flex;align-items:center;justify-content:center;
-  box-shadow:0 0 0 6px #3dffa00f, 0 0 40px #3dffa050;
-  animation:loadPulse 1.8s ease-in-out infinite;
-  font-size:34px;
-}
-@keyframes loadPulse{0%,100%{box-shadow:0 0 0 6px #3dffa00f,0 0 30px #3dffa040}50%{box-shadow:0 0 0 10px #3dffa018,0 0 55px #3dffa070}}
-.load-text{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:6px}
-.load-title{font:800 20px var(--mono);letter-spacing:.06em;color:var(--text)}
-.load-title span{display:inline-block;opacity:0;transform:translateY(10px);animation:loadLetter .5s ease forwards}
-.load-sub{font:600 11px var(--mono);letter-spacing:.18em;color:var(--g);text-transform:uppercase}
-@keyframes loadLetter{to{opacity:1;transform:none}}
-.load-bar-wrap{position:relative;z-index:1;width:min(280px,72vw);height:5px;border-radius:100px;background:#0f1a15;border:1px solid var(--line);overflow:hidden}
-.load-bar{height:100%;width:0%;border-radius:100px;background:linear-gradient(90deg,var(--g2),var(--g));box-shadow:0 0 14px #3dffa070;transition:width .05s linear}
-.load-percent{position:relative;z-index:1;font:700 13px var(--mono);color:var(--muted);letter-spacing:.08em}
+
+.intro-curtain{position:absolute;top:0;bottom:0;width:50%;background:var(--bg);z-index:3;transition:transform 1s cubic-bezier(.76,0,.24,1)}
+.intro-curtain.left{left:0}
+.intro-curtain.right{right:0}
+#loadingScreen.open .intro-curtain.left{transform:translateX(-100%)}
+#loadingScreen.open .intro-curtain.right{transform:translateX(100%)}
+
+.intro-stage{position:relative;z-index:4;display:flex;flex-direction:column;align-items:center;gap:20px;transition:opacity .45s ease, transform .45s ease}
+#loadingScreen.open .intro-stage{opacity:0;transform:translateY(-14px)}
+
+.intro-ring{position:relative;width:112px;height:112px;display:flex;align-items:center;justify-content:center}
+.ring-svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.ring-track{fill:none;stroke:var(--line);stroke-width:2.5}
+.ring-progress{fill:none;stroke:var(--g);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:326;stroke-dashoffset:326;filter:drop-shadow(0 0 8px #3dffa080)}
+.intro-emblem{font-size:36px;filter:drop-shadow(0 0 16px #3dffa060)}
+
+.intro-title{font:800 21px var(--mono);letter-spacing:.07em;color:var(--text);display:flex;gap:1px}
+.intro-title span{display:inline-block;opacity:0;filter:blur(6px);transform:translateY(14px);animation:letterIn .75s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes letterIn{to{opacity:1;filter:blur(0);transform:none}}
+
+.intro-tag{font:600 11px var(--mono);letter-spacing:.24em;color:var(--g);text-transform:uppercase;opacity:0;animation:tagIn .8s cubic-bezier(.16,1,.3,1) forwards;animation-delay:1s}
+@keyframes tagIn{to{opacity:1}}
+
+/* =====================================================================
+   PAGE PANELS (SPA — satu index.html, tanpa reload antar halaman)
+===================================================================== */
+.page-panel{display:none}
+.page-panel.active{display:block;animation:panelIn .55s cubic-bezier(.16,1,.3,1) both}
+@keyframes panelIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
 
 /* =====================================================================
    HEADER / NAVBAR
