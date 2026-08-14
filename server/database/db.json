@@ -13,23 +13,23 @@
   "structure": [
     {
       "role": "Ketua",
-      "name": ""
+      "name": "Kenzy Frananda Adinata"
     },
     {
       "role": "Wakil Ketua",
-      "name": ""
+      "name": "Devi Puspita Sari"
     },
     {
       "role": "Bendahara",
-      "name": ""
+      "name": "Abdan Sholeh"
     },
     {
       "role": "Wakil Bendahara",
-      "name": ""
+      "name": "Nur Zalzabilla Kausyar"
     },
     {
       "role": "Sekretaris",
-      "name": ""
+      "name": "Aini Rahmasari"
     },
     {
       "role": "Wakil Sekretaris",
@@ -37,7 +37,7 @@
     },
     {
       "role": "Keamanan",
-      "name": ""
+      "name": "Rafa Ghofari & Priya Mitra"
     },
     {
       "role": "Kebersihan",
@@ -45,7 +45,7 @@
     },
     {
       "role": "Keagamaan",
-      "name": ""
+      "name": "Deas Andrean"
     }
   ],
   "schedule": {
@@ -90,19 +90,19 @@
     },
     {
       "day": "Rabu",
-      "members": []
+      "members": [Abdan]
     },
     {
       "day": "Kamis",
-      "members": []
+      "members": [Priya & Baihaqky]
     },
     {
       "day": "Jumat",
-      "members": []
+      "members": [Roziq & Riki]
     },
     {
       "day": "Sabtu",
-      "members": []
+      "members": [Farkhan & Deas]
     }
   ],
   "gallery": [
@@ -188,7 +188,7 @@
     },
     "spotify": {
       "label": "Playlist Kelas",
-      "url": "LINK_PLAYLIST_SPOTIFY"
+      "url": "https://open.spotify.com/playlist/2N7og4P8mytq61T8tdyWJH?si=ZY4jCSyDRAy-qqe-YthMvg&utm_source=copy-link&pi=w_SNODd0RVa7f"
     }
   },
   "announcements": []
