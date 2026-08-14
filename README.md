@@ -18,26 +18,26 @@ npm run dev
 
 ## 📁 Struktur Folder
 
+> **Update:** website ini sekarang **single-page app (SPA)**. Beranda, Struktur, Mapel,
+> Piket, Gallery, Social, dan About semuanya jadi satu `index.html` — pindah menu
+> tidak reload dokumen sama sekali (makanya music player nggak pernah kepotong lagi).
+> Cuma `admin.html` yang tetap halaman terpisah.
+
 ```
 class-questers/
 ├── api/
 │   └── index.js             → entry point serverless untuk Vercel (wrap Express app)
 ├── vercel.json               → konfigurasi routing Vercel (static + API)
 ├── client/                 → semua file frontend (disajikan sebagai static files)
-│   ├── index.html          → Beranda
-│   ├── struktur.html       → Struktur Kelas
-│   ├── mapel.html          → Jadwal Mapel
-│   ├── piket.html          → Jadwal Piket
-│   ├── gallery.html        → Gallery Video
-│   ├── social.html         → Social Media
-│   ├── admin.html          → Dashboard admin
+│   ├── index.html          → SPA — semua "halaman" (Beranda/Struktur/Mapel/Piket/Gallery/Social/About)
+│   ├── admin.html          → Dashboard admin (halaman terpisah)
 │   ├── css/style.css
 │   ├── js/
-│   │   ├── app.js          → loading screen, page transition, render data
+│   │   ├── app.js          → intro sinematik, router SPA (ganti panel via hash), render data
 │   │   ├── particles.js    → engine partikel + ember/fire
 │   │   ├── sound.js        → SFX (Web Audio API, tanpa file eksternal)
 │   │   ├── animations.js   → reveal, counter, tilt, magnetic, ripple, cursor glow
-│   │   ├── music.js        → music player
+│   │   ├── music.js        → music player (persisten selama SPA aktif)
 │   │   └── admin.js        → logic dashboard admin
 │   ├── assets/
 │   │   ├── logo.jpg        → ⚠️ WAJIB kamu tambahkan sendiri
