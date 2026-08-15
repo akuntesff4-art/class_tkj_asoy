@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XI TKJ A - System Maintenance & Refresh</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg-dark: #060913;
+            --card-bg: rgba(15, 23, 42, 0.65);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --card-border-hover: rgba(59, 130, 246, 0.3);
+            --primary-blue: #3b82f6;
+            --cyan-accent: #06b6d4;
+            --purple-accent: #8b5cf6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-main);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Animated Grid & Glowing Orbs */
+        .bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .grid-pattern {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 1) 20%, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 1) 20%, transparent 80%);
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.35;
+            animation: floatOrb 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .orb-1 {
+            width: 380px;
+            height: 380px;
+            background: #3b82f6;
+            top: -10%;
+            left: 15%;
+        }
+
+        .orb-2 {
+            width: 420px;
+            height: 420px;
+            background: #8b5cf6;
+            bottom: -15%;
+            right: 10%;
+            animation-delay: -7s;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: #06b6d4;
+            top: 40%;
+            left: -10%;
+            animation-delay: -12s;
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(60px, 40px) scale(1.1); }
+            100% { transform: translate(-40px, 80px) scale(0.95); }
+        }
+
+        /* Glassmorphism Container */
+        .container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 680px;
+            background: var(--card-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--card-border);
+            border-radius: 28px;
+            padding: 48px 40px;
+            box-shadow: 
+                0 30px 60px -12px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transform: translateY(24px);
+            animation: smoothFadeUp 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes smoothFadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header Status Badge */
+        .badge-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 28px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 18px;
+            background: rgba(59, 130, 246, 0.08);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #60a5fa;
+            letter-spacing: 0.3px;
+            backdrop-filter: blur(8px);
+            transition: all 0.4s ease;
+        }
+
+        .status-badge:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+            background: rgba(59, 130, 246, 0.12);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .pulse-indicator {
+            position: relative;
+            display: flex;
+            width: 8px;
+            height: 8px;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary-blue);
+            border-radius: 50%;
+        }
+
+        .pulse-ring {
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            width: 16px;
+            height: 16px;
+            background-color: var(--primary-blue);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: smoothPulse 2.2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+
+        @keyframes smoothPulse {
+            0% { transform: scale(0.4); opacity: 0.8; }
+            80% { transform: scale(1.6); opacity: 0; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
+
+        /* Typography */
+        .title-group {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        h1 {
+            font-size: 34px;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+            line-height: 1.25;
+            margin-bottom: 14px;
+            background: linear-gradient(135deg, #ffffff 30%, #93c5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.description {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+            max-width: 520px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* Ultra Smooth Progress Section */
+        .progress-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 20px 24px;
+            margin-bottom: 36px;
+            transition: border-color 0.4s ease;
+        }
+
+        .progress-card:hover {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+
+        .progress-title {
+            color: var(--text-muted);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .progress-counter {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            color: #60a5fa;
+            font-size: 14px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 100px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #3b82f6 0%, #06b6d4 100%);
+            border-radius: 100px;
+            position: relative;
+            transition: width 2.2s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 2s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Upgrades & Features Grid */
+        .section-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            font-weight: 700;
+            color: var(--text-dim);
+            margin-bottom: 16px;
+            text-align: left;
+            padding-left: 4px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 36px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: left;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(16px);
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: var(--card-border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.5);
+        }
+
+        .icon-box {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #60a5fa;
+            margin-bottom: 14px;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card:hover .icon-box {
+            transform: scale(1.08) rotate(-3deg);
+            background: rgba(59, 130, 246, 0.18);
+            color: #93c5fd;
+        }
+
+        .card h3 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text-main);
+        }
+
+        .card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Network Terminal Footer */
+        .terminal-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 14px 18px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+        }
+
+        .terminal-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .terminal-dot {
+            width: 6px;
+            height: 6px;
+            background: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10b981;
+        }
+
+        .log-text {
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .ping {
+            color: #10b981;
+            font-weight: 500;
+        }
+
+        /* Footer Info */
+        .footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+
+        .footer-brand {
+            font-weight: 600;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 32px 20px;
+                border-radius: 22px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            .terminal-box {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Grid & Glow Effects -->
+    <div class="bg-canvas">
+        <div class="grid-pattern"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Main Card Container -->
+    <main class="container">
+        
+        <!-- Live Status Badge -->
+        <div class="badge-wrapper">
+            <div class="status-badge">
+                <span class="pulse-indicator">
+                    <span class="pulse-ring"></span>
+                    <span class="pulse-dot"></span>
+                </span>
+                <span>Pembaruan Sistem Sedang Berlangsung</span>
+            </div>
+        </div>
+
+        <!-- Main Title & Desc -->
+        <div class="title-group">
+            <h1>XI TKJ A Portal</h1>
+            <p class="description">
+                Website kelas sedang mengalami perombakan tampilan antarmuka (UI) dan peningkatan performa server agar akses semakin cepat dan responsif.
+            </p>
+        </div>
+
+        <!-- Smooth Progress Section -->
+        <div class="progress-card">
+            <div class="progress-header">
+                <span class="progress-title">
+                    <i data-lucide="loader" size="16"></i>
+                    Progress Migrasi System
+                </span>
+                <span class="progress-counter" id="percent-text">0%</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+        </div>
+
+        <!-- Section Label -->
+        <div class="section-label">Pembaruan & Perubahan Utama</div>
+
+        <!-- Features Grid -->
+        <div class="grid">
+            
+            <div class="card" style="animation: smoothFadeUp 0.8s 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;">
+                <div class="icon-box">
+                    <i data-lucide="layout-template" size="22"></i>
+                </div>
+                <h3>Redesain Antarmuka</h3>
+                <p>Tampilan baru yang lebih bersih, modern, dan nyaman diakses di smartphone.</p>
+            </div>
+
+            <div class="card" style="animation: smoothFadeUp 0.8s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;">
+                <div class="icon-box">
+                    <i data-lucide="zap" size="22"></i>
+                </div>
+                <h3>Performa Super Cepat</h3>
+                <p>Optimasi kecepatan muat halaman dan kompresi aset web hingga 3x lebih cepat.</p>
+            </div>
+
+            <div class="card" style="animation: smoothFadeUp 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;">
+                <div class="icon-box">
+                    <i data-lucide="shield-check" size="22"></i>
+                </div>
+                <h3>Peningkatan Keamanan</h3>
+                <p>Implementasi protokol enkripsi data dan sistem keamanan infrastruktur jaringan baru.</p>
+            </div>
+
+            <div class="card" style="animation: smoothFadeUp 0.8s 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;">
+                <div class="icon-box">
+                    <i data-lucide="sparkles" size="22"></i>
+                </div>
+                <h3>Pengalaman Animasi</h3>
+                <p>Navigasi halaman terasa halus dan seamless dengan efek transisi berbasis Hardware Acceleration.</p>
+            </div>
+
+        </div>
+
+        <!-- Terminal Status -->
+        <div class="terminal-box">
+            <div class="terminal-status">
+                <span class="terminal-dot"></span>
+                <span class="log-text">Node: TKJ-CORE-SRV01</span>
+            </div>
+            <span class="ping">ping: 12ms</span>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-brand">
+                <i data-lucide="cpu" size="16"></i>
+                <span>XI TKJ A &bull; Network & Systems</span>
+            </div>
+            <span>&copy; 2026 All Rights Reserved</span>
+        </footer>
+
+    </main>
+
+    <!-- Script Area -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Smooth Counter Animation Script
+        document.addEventListener('DOMContentLoaded', () => {
+            const progressBar = document.getElementById('progress-bar');
+            const percentText = document.getElementById('percent-text');
+            
+            const targetPercent = 85; 
+            const duration = 2200; 
+            
+            setTimeout(() => {
+                progressBar.style.width = targetPercent + '%';
+            }, 200);
+
+            // Ease-Out Cubic interpolation function for butter-smooth numeric counter
+            function easeOutCubic(x) {
+                return 1 - Math.pow(1 - x, 3);
+            }
+
+            let startTime = null;
+
+            function animateCounter(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const elapsed = timestamp - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                const easedProgress = easeOutCubic(progress);
+                const currentNumber = Math.floor(easedProgress * targetPercent);
+
+                percentText.textContent = currentNumber + '%';
+
+                if (progress < 1) {
+                    requestAnimationFrame(animateCounter);
+                } else {
+                    percentText.textContent = targetPercent + '%';
+                }
+            }
+
+            setTimeout(() => {
+                requestAnimationFrame(animateCounter);
+            }, 200);
+        });
+    </script>
+</body>
+</html>
