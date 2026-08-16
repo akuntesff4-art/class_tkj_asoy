@@ -59,10 +59,28 @@ async function checkExistingSession() {
 function enterDashboard() {
   document.getElementById("loginBox").style.display = "none";
   document.getElementById("adminBox").style.display = "block";
+  loadPersistenceBadge();
   loadStructure();
   loadPiket();
   loadSocial();
   loadAnnouncements();
+}
+
+async function loadPersistenceBadge() {
+  const badge = document.getElementById("persistenceBadge");
+  try {
+    const data = await apiGet("/persistence-status");
+    if (data.permanent) {
+      badge.innerHTML = "💾 Penyimpanan: <strong style='color:var(--g)'>Permanen</strong> — perubahan langsung di-commit ke GitHub.";
+    } else {
+      badge.innerHTML =
+        "⚠️ Penyimpanan: <strong style='color:#F5D68A'>Sementara</strong> — perubahan bisa hilang saat cold start Vercel. " +
+        "Set <code>GITHUB_TOKEN</code> &amp; <code>GITHUB_REPO</code> di Environment Variables Vercel supaya permanen (lihat README).";
+      badge.style.color = "var(--muted)";
+    }
+  } catch (e) {
+    badge.textContent = "";
+  }
 }
 
 function logout() {
