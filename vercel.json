@@ -1,0 +1,6 @@
+{
+  "outputDirectory": "client",
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index" }
+  ]
+}
