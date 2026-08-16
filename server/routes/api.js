@@ -12,6 +12,7 @@ router.get("/gallery", ctrl.getGallery);
 router.get("/social", ctrl.getSocial);
 router.get("/announcements", ctrl.getAnnouncements);
 router.get("/all", ctrl.getAll);
+router.get("/persistence-status", ctrl.getPersistenceStatus);
 
 /* ============ ADMIN AUTH ============ */
 // Password diambil dari environment variable, TIDAK pernah dikirim/di-hardcode di frontend.
