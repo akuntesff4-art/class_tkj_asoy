@@ -1,4 +1,4 @@
-const { readDB, writeDB } = require("../database/db");
+const { readDB, writeDB, githubConfigured } = require("../database/db");
 
 // ---------- GET ----------
 exports.getClass = (req, res) => res.json(readDB().class);
@@ -11,59 +11,87 @@ exports.getAnnouncements = (req, res) => res.json(readDB().announcements || []);
 
 exports.getAll = (req, res) => res.json(readDB());
 
+exports.getPersistenceStatus = (req, res) => {
+  res.json({ permanent: githubConfigured() });
+};
+
 // ---------- PUT / POST (admin only, guarded by requireAuth middleware) ----------
-exports.updateStructure = (req, res) => {
+exports.updateStructure = async (req, res) => {
   const body = req.body;
   if (!Array.isArray(body)) {
     return res.status(400).json({ error: "Payload harus berupa array struktur kelas." });
   }
-  const db = readDB();
-  db.structure = body;
-  writeDB(db);
-  res.json({ ok: true, structure: db.structure });
+  try {
+    const db = readDB();
+    db.structure = body;
+    await writeDB(db);
+    res.json({ ok: true, structure: db.structure, permanent: githubConfigured() });
+  } catch (err) {
+    res.status(500).json({ error: err.message || "Gagal menyimpan." });
+  }
 };
 
-exports.updatePiket = (req, res) => {
+exports.updatePiket = async (req, res) => {
   const body = req.body;
   if (!Array.isArray(body)) {
     return res.status(400).json({ error: "Payload harus berupa array piket." });
   }
-  const db = readDB();
-  db.piket = body;
-  writeDB(db);
-  res.json({ ok: true, piket: db.piket });
+  try {
+    const db = readDB();
+    db.piket = body;
+    await writeDB(db);
+    res.json({ ok: true, piket: db.piket, permanent: githubConfigured() });
+  } catch (err) {
+    res.status(500).json({ error: err.message || "Gagal menyimpan." });
+  }
 };
 
-exports.updateSocial = (req, res) => {
-  const db = readDB();
-  db.social = { ...db.social, ...req.body };
-  writeDB(db);
-  res.json({ ok: true, social: db.social });
+exports.updateSocial = async (req, res) => {
+  try {
+    const db = readDB();
+    db.social = { ...db.social, ...req.body };
+    await writeDB(db);
+    res.json({ ok: true, social: db.social, permanent: githubConfigured() });
+  } catch (err) {
+    res.status(500).json({ error: err.message || "Gagal menyimpan." });
+  }
 };
 
-exports.updateSchedule = (req, res) => {
-  const db = readDB();
-  db.schedule = { ...db.schedule, ...req.body };
-  writeDB(db);
-  res.json({ ok: true, schedule: db.schedule });
+exports.updateSchedule = async (req, res) => {
+  try {
+    const db = readDB();
+    db.schedule = { ...db.schedule, ...req.body };
+    await writeDB(db);
+    res.json({ ok: true, schedule: db.schedule, permanent: githubConfigured() });
+  } catch (err) {
+    res.status(500).json({ error: err.message || "Gagal menyimpan." });
+  }
 };
 
-exports.addAnnouncement = (req, res) => {
+exports.addAnnouncement = async (req, res) => {
   const { text } = req.body;
   if (!text || !text.trim()) {
     return res.status(400).json({ error: "Teks pengumuman tidak boleh kosong." });
   }
-  const db = readDB();
-  db.announcements = db.announcements || [];
-  db.announcements.unshift({ id: Date.now(), text: text.trim(), createdAt: new Date().toISOString() });
-  writeDB(db);
-  res.json({ ok: true, announcements: db.announcements });
+  try {
+    const db = readDB();
+    db.announcements = db.announcements || [];
+    db.announcements.unshift({ id: Date.now(), text: text.trim(), createdAt: new Date().toISOString() });
+    await writeDB(db);
+    res.json({ ok: true, announcements: db.announcements, permanent: githubConfigured() });
+  } catch (err) {
+    res.status(500).json({ error: err.message || "Gagal menyimpan." });
+  }
 };
 
-exports.deleteAnnouncement = (req, res) => {
+exports.deleteAnnouncement = async (req, res) => {
   const id = Number(req.params.id);
-  const db = readDB();
-  db.announcements = (db.announcements || []).filter(a => a.id !== id);
-  writeDB(db);
-  res.json({ ok: true, announcements: db.announcements });
+  try {
+    const db = readDB();
+    db.announcements = (db.announcements || []).filter((a) => a.id !== id);
+    await writeDB(db);
+    res.json({ ok: true, announcements: db.announcements, permanent: githubConfigured() });
+  } catch (err) {
+    res.status(500).json({ error: err.message || "Gagal menyimpan." });
+  }
 };
