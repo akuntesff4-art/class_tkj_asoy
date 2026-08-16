@@ -1,24 +1,56 @@
 const crypto = require("crypto");
 
-// In-memory session store: token -> expiry timestamp.
-// Simple and fine for a small class-site admin panel (single process, no need for a real session DB).
-const sessions = new Map();
+// ---------------------------------------------------------------------
+// STATELESS SIGNED TOKEN (bukan in-memory Map).
+//
+// Kenapa diganti dari Map biasa: di Vercel (serverless), tiap request BISA
+// kena instance/proses yang berbeda-beda — jadi kalau session disimpan di
+// memory (Map), request login dan request "Simpan" berikutnya bisa saja
+// "tidak saling kenal" dan admin panel gagal menyimpan padahal password
+// benar. Solusinya: token yang membawa buktinya sendiri (ditandatangani
+// pakai HMAC), jadi verifikasinya tidak butuh memori yang sama sekali.
+// ---------------------------------------------------------------------
 const SESSION_TTL_MS = 2 * 60 * 60 * 1000; // 2 jam
 
+function getSecret() {
+  // Pakai SESSION_SECRET kalau di-set, atau turunan dari ADMIN_PASSWORD,
+  // atau fallback terakhir. Tidak pernah dikirim ke frontend.
+  return process.env.SESSION_SECRET || process.env.ADMIN_PASSWORD || "cq-fallback-secret-change-me";
+}
+
+function sign(payload) {
+  return crypto.createHmac("sha256", getSecret()).update(payload).digest("hex");
+}
+
 function createSession() {
-  const token = crypto.randomBytes(24).toString("hex");
-  sessions.set(token, Date.now() + SESSION_TTL_MS);
-  return token;
+  const expiry = Date.now() + SESSION_TTL_MS;
+  const payload = String(expiry);
+  const signature = sign(payload);
+  // format token: <expiry>.<signature>
+  return Buffer.from(`${payload}.${signature}`).toString("base64url");
 }
 
 function isValidToken(token) {
   if (!token) return false;
-  const expiry = sessions.get(token);
-  if (!expiry) return false;
-  if (Date.now() > expiry) {
-    sessions.delete(token);
+  let decoded;
+  try {
+    decoded = Buffer.from(token, "base64url").toString("utf-8");
+  } catch (e) {
     return false;
   }
+  const [payload, signature] = decoded.split(".");
+  if (!payload || !signature) return false;
+
+  const expected = sign(payload);
+  const sigBuf = Buffer.from(signature, "hex");
+  const expBuf = Buffer.from(expected, "hex");
+  if (sigBuf.length !== expBuf.length || !crypto.timingSafeEqual(sigBuf, expBuf)) {
+    return false; // tanda tangan tidak cocok -> token palsu/rusak
+  }
+
+  const expiry = Number(payload);
+  if (!expiry || Date.now() > expiry) return false; // sudah kedaluwarsa
+
   return true;
 }
 
