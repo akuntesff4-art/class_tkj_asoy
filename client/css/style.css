@@ -135,6 +135,22 @@ header{padding:22px 0;border-bottom:1px solid var(--line);position:relative;z-in
 }
 .tool-btn:hover{border-color:var(--g);box-shadow:0 0 14px #3dffa030}
 
+.online-badge{
+  display:flex;align-items:center;gap:7px;
+  border:1px solid var(--line);background:#0c1116cc;border-radius:100px;
+  padding:0 13px;height:38px;
+  font:600 12px var(--mono);color:var(--text-dim,var(--muted));
+}
+.online-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--g);
+  box-shadow:0 0 8px var(--g);animation:onlinePulse 1.8s ease-in-out infinite;
+  flex-shrink:0;
+}
+@keyframes onlinePulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media(max-width:520px){
+  .online-badge{padding:0 10px;gap:5px;font-size:11px}
+}
+
 /* =====================================================================
    HERO (home)
 ===================================================================== */
@@ -332,32 +348,4 @@ footer .g{color:var(--g)}
    ADMIN
 ===================================================================== */
 .admin-shell{max-width:720px;margin:0 auto;padding:64px 0 100px}
-.admin-login{max-width:340px;margin:80px auto;text-align:center}
-.admin-login input{
-  width:100%;padding:14px 16px;border-radius:10px;background:var(--panel);border:1px solid var(--line);
-  color:var(--text);font-family:var(--mono);margin:16px 0;
-}
-.admin-block{padding:22px;border-radius:16px;background:linear-gradient(160deg,#0e151bee,#080d11f2);border:1px solid var(--line);margin-bottom:16px}
-.admin-block h3{font-size:15px;margin-bottom:14px;color:var(--g)}
-.admin-row{display:flex;gap:10px;margin-bottom:8px}
-.admin-row input{flex:1;padding:10px 12px;border-radius:8px;background:#080d11;border:1px solid var(--line);color:var(--text);font-family:var(--mono);font-size:12.5px}
-.admin-msg{font:600 12px var(--mono);color:var(--g);margin-top:10px;min-height:16px}
-
-/* =====================================================================
-   RESPONSIVE
-===================================================================== */
-@media(max-width:980px){
-  .org-chart,.schedule-grid,.gallery-grid{grid-template-columns:repeat(2,1fr)}
-  .stats-grid{grid-template-columns:1fr 1fr}
-}
-@media(max-width:720px){
-  .navlinks{order:3;width:100%;justify-content:flex-start;overflow-x:auto;padding-bottom:4px}
-  .navlink{flex-shrink:0}
-}
-@media(max-width:560px){
-  .wrap{width:calc(100% - 22px)}
-  .org-chart,.schedule-grid,.gallery-grid,.stats-grid{grid-template-columns:1fr}
-  .logo{width:44px;height:44px}
-  .brand-text h1{font-size:13px}
-  .music-panel{width:calc(100vw - 36px);right:-6px}
-}
+.admin-login{max-width:340px;margin:80px auto;text-align:
