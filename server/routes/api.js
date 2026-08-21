@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const ctrl = require("../controllers/dataController");
 const { requireAuth, createSession, isValidToken } = require("../middleware/auth");
+const presence = require("../state/presence");
 
 /* ============ PUBLIC READ ENDPOINTS ============ */
 router.get("/class", ctrl.getClass);
@@ -13,6 +14,16 @@ router.get("/social", ctrl.getSocial);
 router.get("/announcements", ctrl.getAnnouncements);
 router.get("/all", ctrl.getAll);
 router.get("/persistence-status", ctrl.getPersistenceStatus);
+
+/* ============ PRESENCE (siapa lagi online) ============ */
+router.post("/presence/heartbeat", (req, res) => {
+  const { sessionId } = req.body || {};
+  presence.heartbeat(sessionId);
+  res.json({ ok: true, online: presence.getOnlineCount() });
+});
+router.get("/presence/count", (req, res) => {
+  res.json({ online: presence.getOnlineCount() });
+});
 
 /* ============ ADMIN AUTH ============ */
 // Password diambil dari environment variable, TIDAK pernah dikirim/di-hardcode di frontend.
@@ -41,3 +52,4 @@ router.post("/announcements", requireAuth, ctrl.addAnnouncement);
 router.delete("/announcements/:id", requireAuth, ctrl.deleteAnnouncement);
 
 module.exports = router;
+            
